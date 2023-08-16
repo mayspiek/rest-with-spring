@@ -1,4 +1,4 @@
-package br.com.mayara.converters;
+package br.com.mayara.math;
 
 public class NumberConverter {
     public NumberConverter() {

@@ -1,18 +1,13 @@
-package br.com.mayara.controllers;
+package br.com.mayara.math;
 
-import br.com.mayara.converters.NumberConverter;
-import br.com.mayara.exceptions.UnsupportedMathOperationException;
-import br.com.mayara.math.SimpleMath;
+import br.com.mayara.math.exceptions.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 @RestController
 public class MathController implements SimpleMath{
-    private final AtomicLong counter = new AtomicLong();
 
    @RequestMapping(value="/sum/{numberOne}/{numberTwo}", method=RequestMethod.GET)//permite q nosso controller lide com url parametrizadas
    public Double sum(

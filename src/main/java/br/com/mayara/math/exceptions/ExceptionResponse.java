@@ -1,4 +1,4 @@
-package br.com.mayara.exceptions;
+package br.com.mayara.math.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;

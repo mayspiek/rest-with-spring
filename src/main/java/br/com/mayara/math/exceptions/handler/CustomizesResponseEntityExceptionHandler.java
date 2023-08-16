@@ -1,7 +1,7 @@
-package br.com.mayara.exceptions.handler;
+package br.com.mayara.math.exceptions.handler;
 
-import br.com.mayara.exceptions.ExceptionResponse;
-import br.com.mayara.exceptions.UnsupportedMathOperationException;
+import br.com.mayara.math.exceptions.ExceptionResponse;
+import br.com.mayara.math.exceptions.UnsupportedMathOperationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

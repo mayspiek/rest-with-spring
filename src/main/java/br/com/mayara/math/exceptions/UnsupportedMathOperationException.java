@@ -1,4 +1,4 @@
-package br.com.mayara.exceptions;
+package br.com.mayara.math.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
