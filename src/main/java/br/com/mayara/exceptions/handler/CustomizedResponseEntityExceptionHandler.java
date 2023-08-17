@@ -1,7 +1,8 @@
-package br.com.mayara.math.exceptions.handler;
+package br.com.mayara.exceptions.handler;
 
-import br.com.mayara.math.exceptions.ExceptionResponse;
-import br.com.mayara.math.exceptions.UnsupportedMathOperationException;
+import br.com.mayara.exceptions.ExceptionResponse;
+import br.com.mayara.exceptions.UnsupportedMathOperationException;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +14,7 @@ import java.util.Date;
 
 
 @ControllerAdvice
-public class CustomizesResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(
             Exception ex, WebRequest request) {
@@ -25,14 +26,14 @@ public class CustomizesResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UnsupportedMathOperationException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(
+    @ExceptionHandler(ConfigDataResourceNotFoundException.class)
+    public final ResponseEntity<ExceptionResponse> handleNotFoundException(
             Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 }
 
