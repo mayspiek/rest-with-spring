@@ -1,4 +1,4 @@
-package br.com.mayara.datavo;
+package br.com.mayara.data.vo.v1;
 
 import br.com.mayara.model.Person;
 

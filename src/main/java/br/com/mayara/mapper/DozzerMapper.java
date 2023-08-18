@@ -4,6 +4,7 @@ import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class DozzerMapper {
     private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();

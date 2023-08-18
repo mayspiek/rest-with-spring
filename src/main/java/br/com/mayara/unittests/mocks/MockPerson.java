@@ -1,9 +1,9 @@
-package br.com.mayara.unittests.mapper.mocks;
+package br.com.mayara.unittests.mocks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.mayara.datavo.PersonVO;
+import br.com.mayara.data.vo.v1.PersonVO;
 import br.com.mayara.model.Person;
 
 public class MockPerson {

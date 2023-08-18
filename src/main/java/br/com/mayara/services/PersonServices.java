@@ -1,16 +1,17 @@
 package br.com.mayara.services;
 
-import java.util.List;
-import java.util.logging.Logger;
-
+import br.com.mayara.data.vo.v1.PersonVO;
+import br.com.mayara.data.vo.v2.PersonVOV2;
+import br.com.mayara.exceptions.ResourceNotFoundException;
+import br.com.mayara.mapper.DozzerMapper;
+import br.com.mayara.mapper.custom.PersonMapper;
+import br.com.mayara.model.Person;
+import br.com.mayara.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.mayara.datavo.PersonVO;
-import br.com.mayara.exceptions.ResourceNotFoundException;
-import br.com.mayara.unittests.mapper.DozerMapper;
-import br.com.mayara.model.Person;
-import br.com.mayara.repositories.PersonRepository;
+import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class PersonServices {
@@ -19,12 +20,13 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+    @Autowired
+    PersonMapper mapper;
 
     public List<PersonVO> findAll() {
 
         logger.info("Finding all people!");
-
-        return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+        return DozzerMapper.parseListObjects(repository.findAll(), PersonVO.class);
     }
 
     public PersonVO findById(Long id) {
@@ -33,14 +35,19 @@ public class PersonServices {
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-        return DozerMapper.parseObject(entity, PersonVO.class);
+        return DozzerMapper.parseObject(entity, PersonVO.class);
     }
 
     public PersonVO create(PersonVO person) {
-
         logger.info("Creating one person!");
-        var entity = DozerMapper.parseObject(person, Person.class);
-        var vo =  DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+        var entity = DozzerMapper.parseObject(person, Person.class);
+        var vo =  DozzerMapper.parseObject(repository.save(entity), PersonVO.class);
+        return vo;
+    }
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        logger.info("Creating one person!");
+        var entity = mapper.convertVoToEntity(person);
+        var vo =  mapper.convertEntityToVo(repository.save(entity));
         return vo;
     }
 
@@ -56,7 +63,7 @@ public class PersonServices {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        var vo =  DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+        var vo =  DozzerMapper.parseObject(repository.save(entity), PersonVO.class);
         return vo;
     }
 
