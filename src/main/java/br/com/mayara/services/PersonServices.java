@@ -1,5 +1,6 @@
 package br.com.mayara.services;
 
+import br.com.mayara.controllers.PersonController;
 import br.com.mayara.data.vo.v1.PersonVO;
 import br.com.mayara.data.vo.v2.PersonVOV2;
 import br.com.mayara.exceptions.ResourceNotFoundException;
@@ -8,6 +9,8 @@ import br.com.mayara.mapper.custom.PersonMapper;
 import br.com.mayara.model.Person;
 import br.com.mayara.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,13 +32,15 @@ public class PersonServices {
         return DozzerMapper.parseListObjects(repository.findAll(), PersonVO.class);
     }
 
-    public PersonVO findById(Long id) {
+    public PersonVO findById(Long id) throws Exception {
 
         logger.info("Finding one person!");
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-        return DozzerMapper.parseObject(entity, PersonVO.class);
+        PersonVO vo = DozzerMapper.parseObject(entity, PersonVO.class);
+        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
+        return vo;
     }
 
     public PersonVO create(PersonVO person) {
@@ -55,7 +60,7 @@ public class PersonServices {
 
         logger.info("Updating one person!");
 
-        var entity = repository.findById(person.getId())
+        var entity = repository.findById(person.getKey())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         entity.setFirstName(person.getFirstName());

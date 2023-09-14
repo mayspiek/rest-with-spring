@@ -1,38 +1,37 @@
 package br.com.mayara.data.vo.v1;
 
 import br.com.mayara.model.Person;
+import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
-    private Long id;
-
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
+    @Mapping("id")
+    private Long key;
     private String firstName;
-
     private String lastName;
-
     private String address;
-
     private String gender;
 
     public PersonVO() {
     }
 
     public PersonVO(Person entity) {
-        this.id = entity.getId();
+        this.key = entity.getId();
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.address = entity.getAddress();
         this.gender = entity.getGender();
     }
 
-    public Long getId() {
-        return id;
+    public Long getKey() {
+        return key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(Long id) {
+        this.key = id;
     }
 
     public String getFirstName() {
@@ -72,12 +71,12 @@ public class PersonVO implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PersonVO person = (PersonVO) o;
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
+        return Objects.equals(key, person.key) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(address, person.address) && Objects.equals(gender, person.gender);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(key, firstName, lastName, address, gender);
     }
 
 }
