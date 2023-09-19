@@ -1,7 +1,6 @@
 package br.com.mayara.exceptions.handler;
 
 import br.com.mayara.exceptions.ExceptionResponse;
-import br.com.mayara.exceptions.UnsupportedMathOperationException;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
