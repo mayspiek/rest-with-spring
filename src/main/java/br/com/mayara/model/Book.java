@@ -1,4 +1,4 @@
-package br.com.erudio.model;
+package br.com.mayara.model;
 
 import java.io.Serializable;
 import java.util.Date;

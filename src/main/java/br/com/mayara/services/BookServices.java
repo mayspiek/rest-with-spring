@@ -1,4 +1,4 @@
-package br.com.erudio.services;
+package br.com.mayara.services;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -8,13 +8,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
-import br.com.erudio.controllers.BookController;
-import br.com.erudio.data.vo.v1.BookVO;
-import br.com.erudio.exceptions.RequiredObjectIsNullException;
-import br.com.erudio.exceptions.ResourceNotFoundException;
-import br.com.erudio.mapper.DozerMapper;
-import br.com.erudio.model.Book;
-import br.com.erudio.repositories.BookRepository;
+import br.com.mayara.controllers.BookController;
+import br.com.mayara.data.vo.v1.BookVO;
+import br.com.mayara.exceptions.RequiredObjectIsNullException;
+import br.com.mayara.exceptions.ResourceNotFoundException;
+import br.com.mayara.mapper.DozzerMapper;
+import br.com.mayara.model.Book;
+import br.com.mayara.repositories.BookRepository;
 
 @Service
 public class BookServices {
@@ -28,7 +28,7 @@ public class BookServices {
 
 		logger.info("Finding all book!");
 
-		var books = DozerMapper.parseListObjects(repository.findAll(), BookVO.class);
+		var books = DozzerMapper.parseListObjects(repository.findAll(), BookVO.class);
 		books
 			.stream()
 			.forEach(p -> p.add(linkTo(methodOn(BookController.class).findById(p.getKey())).withSelfRel()));
@@ -41,7 +41,7 @@ public class BookServices {
 		
 		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-		var vo = DozerMapper.parseObject(entity, BookVO.class);
+		var vo = DozzerMapper.parseObject(entity, BookVO.class);
 		vo.add(linkTo(methodOn(BookController.class).findById(id)).withSelfRel());
 		return vo;
 	}
@@ -51,8 +51,8 @@ public class BookServices {
 		if (book == null) throw new RequiredObjectIsNullException();
 		
 		logger.info("Creating one book!");
-		var entity = DozerMapper.parseObject(book, Book.class);
-		var vo =  DozerMapper.parseObject(repository.save(entity), BookVO.class);
+		var entity = DozzerMapper.parseObject(book, Book.class);
+		var vo =  DozzerMapper.parseObject(repository.save(entity), BookVO.class);
 		vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
 		return vo;
 	}
@@ -71,7 +71,7 @@ public class BookServices {
 		entity.setPrice(book.getPrice());
 		entity.setTitle(book.getTitle());
 		
-		var vo =  DozerMapper.parseObject(repository.save(entity), BookVO.class);
+		var vo =  DozzerMapper.parseObject(repository.save(entity), BookVO.class);
 		vo.add(linkTo(methodOn(BookController.class).findById(vo.getKey())).withSelfRel());
 		return vo;
 	}

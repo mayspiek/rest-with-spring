@@ -1,11 +1,11 @@
-package br.com.erudio.unittests.mapper.mocks;
+package br.com.mayara.unittests.mocks;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.erudio.data.vo.v1.BookVO;
-import br.com.erudio.model.Book;
+import br.com.mayara.data.vo.v1.BookVO;
+import br.com.mayara.model.Book;
 
 public class MockBook {
 

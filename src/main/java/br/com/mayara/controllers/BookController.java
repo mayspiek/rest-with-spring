@@ -1,8 +1,9 @@
-package br.com.erudio.controllers;
+package br.com.mayara.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.erudio.data.vo.v1.BookVO;
-import br.com.erudio.services.BookServices;
-import br.com.erudio.util.MediaType;
+import br.com.mayara.data.vo.v1.BookVO;
+import br.com.mayara.services.BookServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,7 +32,7 @@ public class BookController {
 	private BookServices service;
 	
 	@GetMapping(
-		produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML })
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@Operation(summary = "Finds all Book", description = "Finds all Book",
 		tags = {"Book"},
 		responses = {
@@ -54,7 +54,7 @@ public class BookController {
 	}
 	
 	@GetMapping(value = "/{id}",
-		produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML  })
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@Operation(summary = "Finds a Book", description = "Finds a Book",
 		tags = {"Book"},
 		responses = {
@@ -73,8 +73,8 @@ public class BookController {
 	}
 	
 	@PostMapping(
-		consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML  },
-		produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML  })
+		consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE  },
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE  })
 	@Operation(summary = "Adds a new Book",
 		description = "Adds a new Book by passing in a JSON, XML or YML representation of the book!",
 		tags = {"Book"},
@@ -92,8 +92,8 @@ public class BookController {
 	}
 	
 	@PutMapping(
-		consumes = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML  },
-		produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML  })
+		consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE  },
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE  })
 	@Operation(summary = "Updates a Book",
 		description = "Updates a Book by passing in a JSON, XML or YML representation of the book!",
 		tags = {"Book"},

@@ -1,4 +1,4 @@
-package br.com.erudio.unittests.mockito.services;
+package br.com.mayara.unittests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -16,12 +16,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.erudio.data.vo.v1.BookVO;
-import br.com.erudio.exceptions.RequiredObjectIsNullException;
-import br.com.erudio.model.Book;
-import br.com.erudio.repositories.BookRepository;
-import br.com.erudio.services.BookServices;
-import br.com.erudio.unittests.mapper.mocks.MockBook;
+import br.com.mayara.data.vo.v1.BookVO;
+import br.com.mayara.exceptions.RequiredObjectIsNullException;
+import br.com.mayara.model.Book;
+import br.com.mayara.repositories.BookRepository;
+import br.com.mayara.services.BookServices;
+import br.com.mayara.unittests.mocks.MockBook;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)

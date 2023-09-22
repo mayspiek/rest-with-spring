@@ -1,4 +1,4 @@
-package br.com.mayara.data.vo;
+package br.com.mayara.data.vo.v1;
 
 import java.io.Serializable;
 import java.util.Date;
