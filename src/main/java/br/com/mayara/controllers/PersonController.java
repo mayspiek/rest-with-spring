@@ -40,6 +40,7 @@ public class PersonController {
     public List<PersonVO> findAll() throws Exception {
         return service.findAll();
     }
+    @CrossOrigin(origins = "http://localhost:8080")
      @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
      @Operation(summary = "Finds a person", description = "Finds a Person", tags = {"People"},
              responses = {
@@ -59,7 +60,7 @@ public class PersonController {
 
         return service.findById(id);
     }
-
+    @CrossOrigin(origins = {"http://localhost:8080", "https://mayarinha.com.br"})
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Creates a person", description = "Creates a Person", tags = {"People"},
             responses = {
