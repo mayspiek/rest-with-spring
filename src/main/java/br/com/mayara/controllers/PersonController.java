@@ -22,7 +22,9 @@ import java.util.List;
 public class PersonController {
     @Autowired
     private PersonServices service;
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"})
     @Operation(summary = "Finds all people recorded", description = "Find all people recorded in the database", tags = {"People"},
             responses = {
             @ApiResponse(description = "Success", responseCode = "200", content={
@@ -41,7 +43,9 @@ public class PersonController {
         return service.findAll();
     }
     @CrossOrigin(origins = "http://localhost:8080")
-     @GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+     @GetMapping(value="/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+             MediaType.APPLICATION_XML_VALUE,
+             "application/x-yaml"})
      @Operation(summary = "Finds a person", description = "Finds a Person", tags = {"People"},
              responses = {
                      @ApiResponse(description = "Success", responseCode = "200", content={
@@ -61,7 +65,12 @@ public class PersonController {
         return service.findById(id);
     }
     @CrossOrigin(origins = {"http://localhost:8080", "https://mayarinha.com.br"})
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"})
     @Operation(summary = "Creates a person", description = "Creates a Person", tags = {"People"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200", content={
@@ -79,7 +88,12 @@ public class PersonController {
     public PersonVO create(@RequestBody PersonVO person) {
         return service.create(person);
     }
-    @PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/v2", consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE,
+                    "application/x-yaml"})
     @Operation(summary = "Creates a person version 2", description = "Creates a Person version 2", tags = {"People"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200", content={
@@ -98,8 +112,12 @@ public class PersonController {
         return service.createV2(person);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"},
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE,
+                    "application/x-yaml"})
     @Operation(summary = "Updates a person", description = "Updates a Person", tags = {"People"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200", content={
@@ -118,7 +136,9 @@ public class PersonController {
         return service.update(person);
     }
 
-    @DeleteMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            "application/x-yaml"})
     @Operation(summary = "Deletes a person", description = "Deletes a Person", tags = {"People"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content={
