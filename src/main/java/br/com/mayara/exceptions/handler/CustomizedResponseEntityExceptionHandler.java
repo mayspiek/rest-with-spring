@@ -1,6 +1,7 @@
 package br.com.mayara.exceptions.handler;
 
 import br.com.mayara.exceptions.ExceptionResponse;
+import br.com.mayara.exceptions.InvalidJwtAuthenticationExcpetion;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationExcpetion.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationExcpetion(
+            Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }
 

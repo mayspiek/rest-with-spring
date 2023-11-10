@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class UserServices implements UserDetailsService{
 
     private Logger logger = Logger.getLogger(PersonServices.class.getName());
-
+    // quando se injeta atraves do construtor, significa que esse atributo é requerido
     @Autowired
     UserRepository repository;
 
@@ -28,21 +28,10 @@ public class UserServices implements UserDetailsService{
         this.repository = repository;
     }
 
-    public PersonVO findById(Long id) {
-
-        logger.info("Finding one person!");
-
-        var entity = repository.getReferenceById(id);
-        PersonVO vo = DozzerMapper.parseObject(entity, PersonVO.class);
-        vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
-        return vo;
-    }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        logger.info("Finding one person by username " + username + "!");
+        logger.info("Finding one user by name " + username + "!");
         var user = repository.findByUserName(username);
         if (username != null) {
             return user;

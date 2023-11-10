@@ -1,5 +1,6 @@
 package br.com.mayara.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +16,7 @@ import jakarta.persistence.TemporalType;
 @Entity
 @Table(name = "books")
 public class Book implements Serializable {
-
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -77,52 +78,15 @@ public class Book implements Serializable {
 		this.title = title;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((launchDate == null) ? 0 : launchDate.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
+	public boolean equals(Object object) {
+		if (this == object) return true;
+		if (object == null || getClass() != object.getClass()) return false;
+		if (!super.equals(object)) return false;
+		Book book = (Book) object;
+		return java.util.Objects.equals(id, book.id) && java.util.Objects.equals(author, book.author) && java.util.Objects.equals(launchDate, book.launchDate) && java.util.Objects.equals(price, book.price) && java.util.Objects.equals(title, book.title);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Book other = (Book) obj;
-		if (author == null) {
-			if (other.author != null)
-				return false;
-		} else if (!author.equals(other.author))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (launchDate == null) {
-			if (other.launchDate != null)
-				return false;
-		} else if (!launchDate.equals(other.launchDate))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
+	public int hashCode() {
+		return java.util.Objects.hash(super.hashCode(), id, author, launchDate, price, title);
 	}
 }
