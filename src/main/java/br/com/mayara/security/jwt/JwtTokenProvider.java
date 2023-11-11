@@ -1,17 +1,9 @@
 package br.com.mayara.security.jwt;
 
-import br.com.mayara.data.vo.v1.security.TokenVO;
-import br.com.mayara.exceptions.InvalidJwtAuthenticationExcpetion;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,9 +13,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+
+import br.com.mayara.data.vo.v1.security.TokenVO;
+import br.com.mayara.exceptions.InvalidJwtAuthenticationExcpetion;
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class JwtTokenProvider{

@@ -1,20 +1,14 @@
 package br.com.mayara.services;
 
-import br.com.mayara.controllers.PersonController;
-import br.com.mayara.data.vo.v1.PersonVO;
-import br.com.mayara.mapper.DozzerMapper;
-import br.com.mayara.repositories.UserRepository;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
-import java.util.logging.Logger;
+import br.com.mayara.repositories.UserRepository;
 
 @Service
 public class UserServices implements UserDetailsService{
