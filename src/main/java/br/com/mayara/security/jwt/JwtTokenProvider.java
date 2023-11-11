@@ -7,6 +7,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class JwtTokenProvider {
+public class JwtTokenProvider{
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "secret";
     @Value("${security.jwt.token.expire-length:3600000}")
@@ -97,9 +101,8 @@ public class JwtTokenProvider {
         return  null;
     }
 
-    DecodedJWT decodedJWT = decodedToken(token);
     public  boolean validateToken(String token){
-
+        DecodedJWT decodedJWT = decodedToken(token);
         try {
             // se a expiracao do token for antes de agora ele retorna falso
             if (decodedJWT.getExpiresAt().before(new Date())){
@@ -110,4 +113,5 @@ public class JwtTokenProvider {
             throw new InvalidJwtAuthenticationExcpetion("Expired or invalid token");
         }
     }
+
 }
